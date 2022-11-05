@@ -6,6 +6,10 @@ import Orders from './components/Orders/Orders';
 import Shop from './components/Shop/Shop';
 import Main from './layouts/Main';
 import { productsAndCartLoader } from './Loaders/ProductsAndCartLoader';
+import Login from './components/Login/Login';
+import Signup from './components/Signup/Signup';
+import Shipping from './components/Shipping/Shipping';
+import PrivateRoute from './routes/PrivateRoute';
 
 function App() {
   const router = createBrowserRouter([
@@ -15,7 +19,6 @@ function App() {
       children: [
         {
           path: '/',
-          loader: () => fetch('products.json'),
           element: <Shop></Shop>
         },
         {
@@ -25,11 +28,23 @@ function App() {
         },
         {
           path: '/inventory',
-          element: <Inventory></Inventory>
+          element: <PrivateRoute><Inventory></Inventory></PrivateRoute>
+        },
+        {
+          path: '/shipping',
+          element: <PrivateRoute><Shipping></Shipping></PrivateRoute>
         },
         {
           path: 'about',
           element: <About></About>
+        },
+        {
+          path: '/login',
+          element: <Login></Login>
+        },
+        {
+          path: '/signup',
+          element: <Signup></Signup>
         }
       ]
     }
